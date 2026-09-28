@@ -111,24 +111,14 @@
     .sec-head p { flex-basis: 100%; margin: 0; color: var(--ash); max-width: 40rem; }
 
     /* ---------- Chaîne ---------- */
-    .channel { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); }
-    @media (min-width: 900px) { .channel { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 32px; } }
     .vid { text-decoration: none; display: block; }
-    .vid .thumb { position: relative; overflow: hidden; border-radius: 4px; border: 1px solid var(--line); background: var(--crypt); }
-    .vid img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform .4s ease; }
-    .vid:hover img { transform: scale(1.04); }
-    .vid .play {
-      position: absolute; left: 16px; bottom: 16px; width: 54px; height: 38px; border-radius: 10px;
-      background: var(--blood); display: grid; place-items: center; box-shadow: 0 6px 20px rgba(0,0,0,.5);
-    }
-    .vid .play::after { content: ""; border-left: 14px solid #fff; border-top: 8px solid transparent; border-bottom: 8px solid transparent; margin-left: 4px; }
-    .vid.main h3 { font: 700 1.5rem/1.2 var(--body); margin: 16px 0 4px; }
-    .vid .label { font: 500 .75rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--blood-hi); }
-    .vid-list { display: grid; gap: 14px; align-content: start; margin: 0; padding: 0; list-style: none; }
-    .vid-list .vid { display: grid; grid-template-columns: 148px minmax(0, 1fr); gap: 14px; align-items: center; }
-    .vid-list .vid span { font-weight: 500; line-height: 1.3; }
-    .vid-list .vid:hover span { color: #fff; text-decoration: underline; text-decoration-color: var(--blood); text-underline-offset: 3px; }
-    .vid-list .play { display: none; }
+    .vid .thumb { overflow: hidden; border-radius: 4px; border: 1px solid var(--line); background: var(--crypt); }
+    .vid img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; filter: saturate(.8); transition: transform .4s ease, filter .4s ease; }
+    .vid:hover img { transform: scale(1.04); filter: none; }
+    .vid-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin: 0; padding: 0; list-style: none; }
+    @media (min-width: 900px) { .vid-row { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .vid span { display: block; margin-top: 10px; font-weight: 500; line-height: 1.3; color: var(--bone-dim); }
+    .vid:hover span { color: var(--bone); }
     .channel-cta { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 
     /* ---------- Projets (dossiers) ---------- */
@@ -182,8 +172,10 @@
 
     .one { width: min(420px, 90%); }
 
-    .greyhound-stage { background: radial-gradient(90% 90% at 50% 40%, #0b0a3a, #02011a); display: grid; place-items: center; }
-    .greyhound-stage img { width: min(360px, 80%); }
+    .wolf-stage { margin: 0; padding: 0; }
+    .wolf-stage img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; filter: sepia(.15) contrast(1.05); }
+    .wolf-stage::after { content: ""; position: absolute; inset: auto 0 0 0; height: 30%; background: linear-gradient(transparent, rgba(0,0,0,.6)); pointer-events: none; }
+    .wolf-stage figcaption { position: absolute; z-index: 1; left: 12px; bottom: 10px; right: 12px; font: 500 .6875rem/1.3 var(--mono); color: rgba(235, 227, 211, .75); text-shadow: 0 1px 3px #000; }
 
     .usb-stage { display: grid; place-items: center; min-height: 320px; }
     .usb-stage svg { width: min(380px, 90%); height: auto; }
@@ -209,7 +201,6 @@
     footer a:hover { color: var(--bone); }
 
     @media (max-width: 520px) {
-      .vid-list .vid { grid-template-columns: 112px minmax(0, 1fr); }
       .facts b { font-size: .9375rem; }
     }
   </style>
@@ -224,45 +215,50 @@
     <header class="hero">
       <div class="badge"><img src="assets/avatar.webp" alt="Le soldat zombie, logo de la chaîne Kenshin9977" width="400" height="400"></div>
       <div>
-        <p class="eyebrow">Youtubeur · développeur</p>
+        <p class="eyebrow">Développeur · youtubeur</p>
         <h1>Kenshin<span>9977</span></h1>
-        <p class="lede">Je fais des vidéos sur le mode Zombies de Call of Duty. À côté, je code des petits outils Windows open source et quelques sites web. Voici tout ce qui tourne en ce moment.</p>
+        <p class="lede">Je code des sites web et des petits outils Windows open source. J'ai aussi une chaîne YouTube sur le mode Zombies de Call of Duty. Voici tout ce qui tourne en ce moment.</p>
         <div class="round">
           <span class="tally draw" data-count="8" aria-hidden="true"></span>
           <small><b>8 projets</b>en cours</small>
         </div>
         <ul class="socials">
-          <li><a class="btn red" href="https://www.youtube.com/@Kenshin9977"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>YouTube</a></li>
-          <li><a class="btn" href="https://github.com/Kenshin9977"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub</a></li>
+          <li><a class="btn red" href="https://github.com/Kenshin9977"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub</a></li>
+          <li><a class="btn" href="https://www.youtube.com/@Kenshin9977"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>YouTube</a></li>
           <li><a class="btn" href="https://x.com/Kenshin9977"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.8 2.3h7l4.8 6.4 5.6-6.4Zm-1.2 17.9h1.9L7 4.2H5l12 16Z"/></svg>X</a></li>
         </ul>
       </div>
     </header>
 
-    <!-- ================= Chaîne ================= -->
-    <section id="chaine">
+    <!-- ================= Sites ================= -->
+    <section id="sites">
       <div class="sec-head">
-        <h2>La chaîne</h2>
-        <span class="tally" data-count="1" aria-hidden="true"></span>
-        <p>Guides d'Easter Eggs, quêtes principales et histoire du mode Zombies, en français.</p>
+        <h2>Sites web</h2>
+        <span class="tally" data-count="2" aria-hidden="true"></span>
       </div>
-      <div class="channel">
-        <a class="vid main" href="https://www.youtube.com/watch?v=AkUxYamXR5A">
-          <div class="thumb"><img src="assets/yt-AkUxYamXR5A.webp" alt="" width="640" height="360"><span class="play"></span></div>
-          <h3>La quête principale de la Citadelle des Morts</h3>
-          <span class="label">Dernière vidéo · Black Ops 6</span>
-        </a>
-        <ul class="vid-list">
-          <li><a class="vid" href="https://www.youtube.com/watch?v=FRdclZSSJQ0"><div class="thumb"><img src="assets/yt-FRdclZSSJQ0.webp" alt="" width="640" height="360" loading="lazy"></div><span>Tout sur Terminus</span></a></li>
-          <li><a class="vid" href="https://www.youtube.com/watch?v=TL3FwUeM04s"><div class="thumb"><img src="assets/yt-TL3FwUeM04s.webp" alt="" width="640" height="360" loading="lazy"></div><span>Tout sur Liberty Falls</span></a></li>
-          <li><a class="vid" href="https://www.youtube.com/watch?v=rbJETYBCXsM"><div class="thumb"><img src="assets/yt-rbJETYBCXsM.webp" alt="" width="640" height="360" loading="lazy"></div><span>L'histoire du mode zombie de Call of Duty</span></a></li>
-          <li><a class="vid" href="https://www.youtube.com/watch?v=N5Kf2DSe2aI"><div class="thumb"><img src="assets/yt-N5Kf2DSe2aI.webp" alt="" width="640" height="360" loading="lazy"></div><span>Black Ops 6 : avis, critique et infos</span></a></li>
-          <li><a class="vid" href="https://www.youtube.com/watch?v=6v8fcWF_maI"><div class="thumb"><img src="assets/yt-6v8fcWF_maI.webp" alt="" width="640" height="360" loading="lazy"></div><span>Zombie Chronicles : toutes les quêtes secondaires</span></a></li>
-        </ul>
-      </div>
-      <div class="channel-cta">
-        <a class="btn red" href="https://www.youtube.com/@Kenshin9977?sub_confirmation=1">S'abonner</a>
-        <a class="btn" href="https://www.youtube.com/@Kenshin9977/videos">Toutes les vidéos</a>
+      <div class="sites">
+        <article class="site">
+          <a class="shot" href="https://cod-zombies.com">
+            <div class="browser">
+              <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">https://<b>cod-zombies.com</b></span></div>
+              <img src="assets/codz.webp" alt="Page d'accueil de CoD Zombies Guide" width="1440" height="900" loading="lazy">
+            </div>
+          </a>
+          <h3>CoD Zombies Guide</h3>
+          <p>Tous les guides, Easter Eggs et secrets du mode Zombies, pour toutes les maps et tous les jeux. Avec des outils pour résoudre les étapes les plus pénibles.</p>
+          <a class="btn" href="https://cod-zombies.com">Ouvrir cod-zombies.com</a>
+        </article>
+        <article class="site">
+          <a class="shot" href="https://reparationmanette.fr">
+            <div class="browser">
+              <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">https://<b>reparationmanette.fr</b></span></div>
+              <img src="assets/site-gamepad.webp" alt="Page d'accueil de Techshin Repairs" width="1440" height="900" loading="lazy">
+            </div>
+          </a>
+          <h3>Techshin Repairs</h3>
+          <p>Réparation de manettes : capteurs anti-drift à effet Hall, installation de palettes, remplacement de batterie. Commande et suivi en ligne, garantie 2 ans.</p>
+          <a class="btn" href="https://reparationmanette.fr">Ouvrir reparationmanette.fr</a>
+        </article>
       </div>
     </section>
 
@@ -380,42 +376,29 @@
               <li><span>Langage</span><b>C++</b></li>
             </ul>
           </div>
-          <div class="stage greyhound-stage">
-            <img src="assets/greyhound-logo.webp" alt="Logo de Greyhound, un lévrier aux couleurs néon" width="640" height="640" loading="lazy">
-          </div>
+          <figure class="stage wolf-stage">
+            <img src="assets/wolf.webp" alt="Un loup gris du Mexique qui trotte dans les herbes sèches" width="1100" height="733" loading="lazy">
+            <figcaption>Loup gris du Mexique · Jim Clark, U.S. Fish and Wildlife Service, domaine public</figcaption>
+          </figure>
         </article>
       </div>
     </section>
 
-    <!-- ================= Sites ================= -->
-    <section id="sites">
+    <!-- ================= Chaîne ================= -->
+    <section id="chaine">
       <div class="sec-head">
-        <h2>Sites web</h2>
-        <span class="tally" data-count="2" aria-hidden="true"></span>
+        <h2>La chaîne</h2>
+        <span class="tally" data-count="1" aria-hidden="true"></span>
+        <p>Guides d'Easter Eggs, quêtes principales et histoire du mode Zombies, en français. Les vidéos restent en ligne.</p>
       </div>
-      <div class="sites">
-        <article class="site">
-          <a class="shot" href="https://cod-zombies.com">
-            <div class="browser">
-              <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">https://<b>cod-zombies.com</b></span></div>
-              <img src="assets/codz.webp" alt="Page d'accueil de CoD Zombies Guide" width="1440" height="900" loading="lazy">
-            </div>
-          </a>
-          <h3>CoD Zombies Guide</h3>
-          <p>Tous les guides, Easter Eggs et secrets du mode Zombies, pour toutes les maps et tous les jeux. Avec des outils pour résoudre les étapes les plus pénibles.</p>
-          <a class="btn" href="https://cod-zombies.com">Ouvrir cod-zombies.com</a>
-        </article>
-        <article class="site">
-          <a class="shot" href="https://reparationmanette.fr">
-            <div class="browser">
-              <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">https://<b>reparationmanette.fr</b></span></div>
-              <img src="assets/site-gamepad.webp" alt="Page d'accueil de Techshin Repairs" width="1440" height="900" loading="lazy">
-            </div>
-          </a>
-          <h3>Techshin Repairs</h3>
-          <p>Réparation de manettes : capteurs anti-drift à effet Hall, installation de palettes, remplacement de batterie. Commande et suivi en ligne, garantie 2 ans.</p>
-          <a class="btn" href="https://reparationmanette.fr">Ouvrir reparationmanette.fr</a>
-        </article>
+      <ul class="vid-row">
+        <li><a class="vid" href="https://www.youtube.com/watch?v=AkUxYamXR5A"><div class="thumb"><img src="assets/yt-AkUxYamXR5A.webp" alt="" width="640" height="360" loading="lazy"></div><span>La quête principale de la Citadelle des Morts</span></a></li>
+        <li><a class="vid" href="https://www.youtube.com/watch?v=FRdclZSSJQ0"><div class="thumb"><img src="assets/yt-FRdclZSSJQ0.webp" alt="" width="640" height="360" loading="lazy"></div><span>Tout sur Terminus</span></a></li>
+        <li><a class="vid" href="https://www.youtube.com/watch?v=TL3FwUeM04s"><div class="thumb"><img src="assets/yt-TL3FwUeM04s.webp" alt="" width="640" height="360" loading="lazy"></div><span>Tout sur Liberty Falls</span></a></li>
+        <li><a class="vid" href="https://www.youtube.com/watch?v=rbJETYBCXsM"><div class="thumb"><img src="assets/yt-rbJETYBCXsM.webp" alt="" width="640" height="360" loading="lazy"></div><span>L'histoire du mode zombie de Call of Duty</span></a></li>
+      </ul>
+      <div class="channel-cta">
+        <a class="btn" href="https://www.youtube.com/@Kenshin9977/videos">Voir la chaîne</a>
       </div>
     </section>
 
