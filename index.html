@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kenshin9977 — Projets</title>
+  <meta name="description" content="Tous les projets de Kenshin9977 : chaîne YouTube, logiciels Windows open source et sites web.">
+  <meta property="og:title" content="Kenshin9977 — Projets">
+  <meta property="og:description" content="Chaîne YouTube, logiciels Windows open source et sites web.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f6f4;
+      --surface: #ffffff;
+      --border: #e3e3de;
+      --text: #1b1b1a;
+      --muted: #66665f;
+      --accent: #c2410c;
+      --accent-soft: #fdeee6;
+      --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.04);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121211;
+        --surface: #1b1b1a;
+        --border: #2d2d2a;
+        --text: #ececea;
+        --muted: #9d9d95;
+        --accent: #fb923c;
+        --accent-soft: #2e1d12;
+        --shadow: none;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.55 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    a { color: inherit; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 64px 16px 48px; }
+
+    header { margin-bottom: 48px; }
+    header h1 { font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1.1; margin: 0 0 12px; letter-spacing: -.02em; }
+    header p { margin: 0; color: var(--muted); max-width: 38rem; font-size: 1.075rem; }
+    .socials { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .socials a {
+      font-size: .875rem; font-weight: 500; text-decoration: none;
+      padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px;
+      background: var(--surface);
+    }
+    .socials a:hover { border-color: var(--accent); color: var(--accent); }
+
+    section { margin-bottom: 44px; }
+    section h2 {
+      font-size: .8rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em;
+      color: var(--muted); margin: 0 0 14px;
+    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+
+    .card {
+      position: relative; display: flex; flex-direction: column;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      padding: 20px; box-shadow: var(--shadow);
+      transition: border-color .15s, transform .15s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .card.featured { grid-column: 1 / -1; }
+    .card h3 { margin: 0 0 6px; font-size: 1.125rem; letter-spacing: -.01em; }
+    .card h3 a { text-decoration: none; }
+    .card h3 a::after { content: ""; position: absolute; inset: 0; border-radius: 12px; }
+    .card p { margin: 0 0 16px; color: var(--muted); font-size: .95rem; flex: 1; }
+    .meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    .tag {
+      font: 500 .75rem/1 "JetBrains Mono", ui-monospace, monospace;
+      padding: 5px 8px; border-radius: 6px; background: var(--bg); color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .tag.accent { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+    .links { margin-left: auto; display: flex; gap: 12px; position: relative; z-index: 1; }
+    .links a { font-size: .85rem; font-weight: 500; color: var(--accent); text-decoration: none; }
+    .links a:hover { text-decoration: underline; }
+
+    footer { color: var(--muted); font-size: .85rem; border-top: 1px solid var(--border); padding-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Kenshin9977</h1>
+      <p>Vidéos sur le mode Zombies de Call of Duty et l'informatique, petits outils Windows open source et quelques sites web. Tout est ici.</p>
+      <nav class="socials" aria-label="Réseaux">
+        <a href="https://www.youtube.com/@Kenshin9977">YouTube</a>
+        <a href="https://github.com/Kenshin9977">GitHub</a>
+        <a href="https://x.com/Kenshin9977">X</a>
+      </nav>
+    </header>
+
+    <section>
+      <h2>Chaîne</h2>
+      <div class="grid">
+        <article class="card featured">
+          <h3><a href="https://www.youtube.com/@Kenshin9977">Kenshin9977 sur YouTube</a></h3>
+          <p>Guides et Easter Eggs Call of Duty Zombies, et des vidéos de vulgarisation sur l'informatique.</p>
+          <div class="meta"><span class="tag accent">YouTube</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Logiciels</h2>
+      <div class="grid">
+        <article class="card">
+          <h3><a href="https://github.com/Kenshin9977/video-dl">video-dl</a></h3>
+          <p>Une interface graphique pour yt-dlp qui rend le téléchargement de vidéos simple, sans ligne de commande.</p>
+          <div class="meta">
+            <span class="tag">Python</span>
+            <div class="links"><a href="https://github.com/Kenshin9977/video-dl/releases/latest">Télécharger</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3><a href="https://github.com/Kenshin9977/Discord-Overlay">DiscordOverlay</a></h3>
+          <p>Garde l'overlay vocal Discord StreamKit d'OBS sur le salon où tu te trouves : change de serveur ou de salon en plein stream, l'overlay suit.</p>
+          <div class="meta">
+            <span class="tag">C#</span><span class="tag">OBS</span>
+            <div class="links"><a href="https://github.com/Kenshin9977/Discord-Overlay/releases/latest">Télécharger</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3><a href="https://github.com/Kenshin9977/AudioWinFix">AudioWinFix</a></h3>
+          <p>Fixe tes périphériques audio par défaut (lecture, enregistrement, communication) et annule les bascules automatiques de Windows au branchement.</p>
+          <div class="meta">
+            <span class="tag">C#</span>
+            <div class="links"><a href="https://github.com/Kenshin9977/AudioWinFix/releases/latest">Télécharger</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3><a href="https://github.com/Kenshin9977/usbscope">usbscope</a></h3>
+          <p>Que vaut vraiment ce câble USB-C ? Application Windows dans la barre des tâches, inspirée de WhatCable sur macOS.</p>
+          <div class="meta"><span class="tag">C#</span></div>
+        </article>
+
+        <article class="card">
+          <h3>Greyhound</h3>
+          <p>Ma version de Greyhound, l'extracteur d'assets Call of Duty : modèles, textures, sons, animations et maps, lus directement depuis les fichiers du jeu.</p>
+          <div class="meta"><span class="tag">C++</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Sites web</h2>
+      <div class="grid">
+        <article class="card">
+          <h3><a href="https://cod-zombies.com">CoD Zombies Guide</a></h3>
+          <p>Tous les guides, Easter Eggs et secrets du mode Zombies de Call of Duty, pour toutes les maps et tous les jeux.</p>
+          <div class="meta"><span class="tag">cod-zombies.com</span></div>
+        </article>
+
+        <article class="card">
+          <h3><a href="https://kenshin9977.xyz">Techshin Repairs</a></h3>
+          <p>Réparation de manettes de jeu : commande en ligne, devis automatique, paiement et suivi de la réparation.</p>
+          <div class="meta"><span class="tag">kenshin9977.xyz</span></div>
+        </article>
+      </div>
+    </section>
+
+    <footer>© Kenshin9977</footer>
+  </div>
+</body>
+</html>
