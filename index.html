@@ -2,177 +2,453 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kenshin9977 — Projets</title>
-  <meta name="description" content="Tous les projets de Kenshin9977 : chaîne YouTube, logiciels Windows open source et sites web.">
-  <meta property="og:title" content="Kenshin9977 — Projets">
-  <meta property="og:description" content="Chaîne YouTube, logiciels Windows open source et sites web.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kenshin9977</title>
+  <meta name="description" content="Vidéos Call of Duty Zombies, outils Windows open source et sites web de Kenshin9977.">
+  <meta property="og:title" content="Kenshin9977">
+  <meta property="og:description" content="Vidéos Call of Duty Zombies, outils Windows open source et sites web.">
+  <meta property="og:image" content="https://kenshin9977.github.io/assets/avatar.webp">
+  <meta name="theme-color" content="#0e0b0b">
+  <link rel="icon" href="assets/avatar.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700;900&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
   <style>
+    /* Un seul univers visuel, sombre : celui de la chaîne (noir, rouge sang, os). */
     :root {
-      --bg: #f6f6f4;
-      --surface: #ffffff;
-      --border: #e3e3de;
-      --text: #1b1b1a;
-      --muted: #66665f;
-      --accent: #c2410c;
-      --accent-soft: #fdeee6;
-      --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.04);
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #121211;
-        --surface: #1b1b1a;
-        --border: #2d2d2a;
-        --text: #ececea;
-        --muted: #9d9d95;
-        --accent: #fb923c;
-        --accent-soft: #2e1d12;
-        --shadow: none;
-      }
+      color-scheme: dark;
+      --pit: #0e0b0b;
+      --crypt: #171212;
+      --crypt-2: #211919;
+      --bone: #ebe3d3;
+      --bone-dim: #c9bfae;
+      --ash: #968b80;
+      --blood: #c8141f;
+      --blood-hi: #e8323b;
+      --rust: #5e1714;
+      --line: rgba(235, 227, 211, .12);
+
+      --display: "Big Shoulders Stencil Display", Impact, "Arial Narrow", sans-serif;
+      --body: Barlow, "Segoe UI", system-ui, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
     }
     * { box-sizing: border-box; }
     html { -webkit-text-size-adjust: 100%; }
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font: 16px/1.55 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--pit);
+      color: var(--bone);
+      font: 400 1.0625rem/1.6 var(--body);
+      padding-inline: 16px;
+      overflow-x: hidden;
     }
+    /* grain de pellicule */
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 50; opacity: .07;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    img { max-width: 100%; height: auto; display: block; }
     a { color: inherit; }
-    .wrap { max-width: 960px; margin: 0 auto; padding: 64px 16px 48px; }
+    a:focus-visible, .btn:focus-visible { outline: 2px solid var(--blood-hi); outline-offset: 3px; border-radius: 2px; }
+    .wrap { max-width: 1180px; margin: 0 auto; }
 
-    header { margin-bottom: 48px; }
-    header h1 { font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1.1; margin: 0 0 12px; letter-spacing: -.02em; }
-    header p { margin: 0; color: var(--muted); max-width: 38rem; font-size: 1.075rem; }
-    .socials { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-    .socials a {
-      font-size: .875rem; font-weight: 500; text-decoration: none;
-      padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px;
-      background: var(--surface);
-    }
-    .socials a:hover { border-color: var(--accent); color: var(--accent); }
+    /* ---------- Compteur de manches (bâtons) ---------- */
+    .tally { display: inline-flex; gap: .5em; align-items: center; color: var(--blood); }
+    .tally svg { height: 1em; width: auto; overflow: visible; }
+    .tally path { stroke: currentColor; stroke-width: 7; stroke-linecap: round; fill: none; filter: url(#chalk); }
+    .draw path { stroke-dasharray: 130; stroke-dashoffset: 0; animation: stroke .35s ease-out backwards; }
+    @keyframes stroke { from { stroke-dashoffset: 130; } }
+    @media (prefers-reduced-motion: reduce) { .draw path { animation: none; } }
 
-    section { margin-bottom: 44px; }
-    section h2 {
-      font-size: .8rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em;
-      color: var(--muted); margin: 0 0 14px;
+    /* ---------- En-tête ---------- */
+    .hero {
+      display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px;
+      padding-block: 56px 72px; align-items: center;
     }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    @media (min-width: 820px) {
+      .hero { grid-template-columns: 300px minmax(0, 1fr); gap: 56px; padding-block: 96px 112px; }
+    }
+    .badge {
+      position: relative; width: min(300px, 70vw); aspect-ratio: 1; border-radius: 50%;
+      background: var(--blood); padding: 14px; box-shadow: 0 0 0 1px var(--rust), 0 30px 80px -20px rgba(200, 20, 31, .45);
+    }
+    .badge img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--bone); }
+    .eyebrow {
+      font: 500 .8125rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ash);
+      margin: 0 0 18px;
+    }
+    .hero h1 {
+      font: 900 clamp(3.5rem, 11vw, 8.5rem)/.85 var(--display); letter-spacing: -.01em; text-transform: uppercase;
+      margin: 0 0 24px; overflow-wrap: anywhere;
+    }
+    .hero h1 span { color: var(--blood); }
+    .hero .lede { font-size: 1.25rem; line-height: 1.5; color: var(--bone-dim); max-width: 34rem; margin: 0 0 28px; text-wrap: pretty; }
+    .round { display: flex; align-items: center; gap: 18px; margin: 0 0 32px; }
+    .round .tally { font-size: 3.25rem; }
+    .round small { font: 500 .8125rem/1.35 var(--mono); color: var(--ash); text-transform: uppercase; letter-spacing: .1em; }
+    .round small b { display: block; color: var(--bone); font-size: 1rem; letter-spacing: .04em; }
+    .socials { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
 
-    .card {
-      position: relative; display: flex; flex-direction: column;
-      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-      padding: 20px; box-shadow: var(--shadow);
-      transition: border-color .15s, transform .15s;
+    .btn {
+      display: inline-flex; align-items: center; gap: .5em; text-decoration: none;
+      font: 600 .9375rem/1 var(--body); letter-spacing: .02em;
+      padding: 13px 18px; border-radius: 3px; border: 1px solid var(--line); background: var(--crypt);
+      transition: background .15s, border-color .15s, transform .15s;
     }
-    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .card.featured { grid-column: 1 / -1; }
-    .card h3 { margin: 0 0 6px; font-size: 1.125rem; letter-spacing: -.01em; }
-    .card h3 a { text-decoration: none; }
-    .card h3 a::after { content: ""; position: absolute; inset: 0; border-radius: 12px; }
-    .card p { margin: 0 0 16px; color: var(--muted); font-size: .95rem; flex: 1; }
-    .meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-    .tag {
-      font: 500 .75rem/1 "JetBrains Mono", ui-monospace, monospace;
-      padding: 5px 8px; border-radius: 6px; background: var(--bg); color: var(--muted);
-      border: 1px solid var(--border);
-    }
-    .tag.accent { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
-    .links { margin-left: auto; display: flex; gap: 12px; position: relative; z-index: 1; }
-    .links a { font-size: .85rem; font-weight: 500; color: var(--accent); text-decoration: none; }
-    .links a:hover { text-decoration: underline; }
+    .btn:hover { border-color: var(--bone-dim); transform: translateY(-1px); }
+    .btn.red { background: var(--blood); border-color: var(--blood); color: #fff; }
+    .btn.red:hover { background: var(--blood-hi); border-color: var(--blood-hi); }
+    .btn svg { width: 1.1em; height: 1.1em; fill: currentColor; }
 
-    footer { color: var(--muted); font-size: .85rem; border-top: 1px solid var(--border); padding-top: 20px; }
+    /* ---------- Sections ---------- */
+    section { padding-block: 56px; border-top: 1px solid var(--line); }
+    .sec-head { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 24px; margin-bottom: 40px; }
+    .sec-head h2 {
+      font: 900 clamp(2.5rem, 7vw, 4.5rem)/.9 var(--display); text-transform: uppercase; margin: 0;
+      text-wrap: balance;
+    }
+    .sec-head .tally { font-size: 2.4rem; margin-bottom: .35rem; }
+    .sec-head p { flex-basis: 100%; margin: 0; color: var(--ash); max-width: 40rem; }
+
+    /* ---------- Chaîne ---------- */
+    .channel { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); }
+    @media (min-width: 900px) { .channel { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 32px; } }
+    .vid { text-decoration: none; display: block; }
+    .vid .thumb { position: relative; overflow: hidden; border-radius: 4px; border: 1px solid var(--line); background: var(--crypt); }
+    .vid img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform .4s ease; }
+    .vid:hover img { transform: scale(1.04); }
+    .vid .play {
+      position: absolute; left: 16px; bottom: 16px; width: 54px; height: 38px; border-radius: 10px;
+      background: var(--blood); display: grid; place-items: center; box-shadow: 0 6px 20px rgba(0,0,0,.5);
+    }
+    .vid .play::after { content: ""; border-left: 14px solid #fff; border-top: 8px solid transparent; border-bottom: 8px solid transparent; margin-left: 4px; }
+    .vid.main h3 { font: 700 1.5rem/1.2 var(--body); margin: 16px 0 4px; }
+    .vid .label { font: 500 .75rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--blood-hi); }
+    .vid-list { display: grid; gap: 14px; align-content: start; margin: 0; padding: 0; list-style: none; }
+    .vid-list .vid { display: grid; grid-template-columns: 148px minmax(0, 1fr); gap: 14px; align-items: center; }
+    .vid-list .vid span { font-weight: 500; line-height: 1.3; }
+    .vid-list .vid:hover span { color: #fff; text-decoration: underline; text-decoration-color: var(--blood); text-underline-offset: 3px; }
+    .vid-list .play { display: none; }
+    .channel-cta { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+    /* ---------- Projets (dossiers) ---------- */
+    .dossiers { display: grid; gap: 88px; }
+    .proj { display: grid; gap: 32px; grid-template-columns: minmax(0, 1fr); align-items: center; }
+    @media (min-width: 900px) {
+      .proj { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 64px; }
+      .proj:nth-child(even) .proj-text { order: 2; }
+    }
+    .kicker { font: 500 .8125rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--blood-hi); margin: 0 0 12px; }
+    .proj h3 { font: 900 clamp(2.75rem, 6vw, 4rem)/.9 var(--display); text-transform: uppercase; margin: 0 0 18px; overflow-wrap: anywhere; }
+    .proj .pitch { color: var(--bone-dim); margin: 0 0 24px; max-width: 32rem; text-wrap: pretty; }
+    .facts {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0 0 26px; padding: 0; list-style: none;
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); max-width: 30rem;
+    }
+    .facts li { padding: 12px 0 12px 14px; border-left: 1px solid var(--line); }
+    .facts li:first-child { border-left: 0; padding-left: 0; }
+    .facts span { display: block; font: 500 .6875rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ash); margin-bottom: 6px; }
+    .facts b { font: 500 1.0625rem/1 var(--mono); font-variant-numeric: tabular-nums; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    /* Compositions de fenêtres */
+    .stage {
+      position: relative; border-radius: 6px; padding: clamp(24px, 5vw, 48px);
+      background:
+        radial-gradient(120% 80% at 70% 0%, rgba(200, 20, 31, .22), transparent 60%),
+        var(--crypt);
+      border: 1px solid var(--line); overflow: hidden;
+    }
+    .win {
+      border-radius: 8px; border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 2px 0 rgba(255,255,255,.04) inset, 0 30px 60px -18px rgba(0,0,0,.8);
+      transition: transform .35s ease;
+    }
+    .stage .win { margin-inline: auto; }
+    .tilt-l { transform: rotate(-1.6deg); }
+    .tilt-r { transform: rotate(1.6deg); }
+    .stage:hover .win { transform: none; }
+
+    .fan { display: grid; grid-template-columns: 1fr; }
+    .fan > * { grid-area: 1 / 1; }
+    .fan .back { width: 72%; justify-self: end; transform: rotate(4deg) translate(2%, 3%); filter: brightness(.7); }
+    .fan .front { width: 72%; justify-self: start; transform: rotate(-2deg); }
+    .stage:hover .fan .back { transform: rotate(2deg) translate(4%, 2%); }
+    .stage:hover .fan .front { transform: rotate(-1deg); }
+
+    .pop { position: relative; }
+    .pop .main-win { width: 80%; margin-left: auto; }
+    .pop .popover { position: absolute; left: 0; bottom: 6%; width: 34%; min-width: 120px; }
+
+    .one { width: min(420px, 90%); }
+
+    .greyhound-stage { background: radial-gradient(90% 90% at 50% 40%, #0b0a3a, #02011a); display: grid; place-items: center; }
+    .greyhound-stage img { width: min(360px, 80%); }
+
+    .usb-stage { display: grid; place-items: center; min-height: 320px; }
+    .usb-stage svg { width: min(380px, 90%); height: auto; }
+
+    /* ---------- Sites ---------- */
+    .sites { display: grid; gap: 40px; grid-template-columns: minmax(0, 1fr); }
+    @media (min-width: 900px) { .sites { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; } }
+    .browser { border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,.12); background: var(--crypt-2); box-shadow: 0 30px 60px -24px rgba(0,0,0,.85); }
+    .browser .bar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+    .browser .dots { display: flex; gap: 6px; }
+    .browser .dots i { width: 10px; height: 10px; border-radius: 50%; background: #3a3030; }
+    .browser .url { flex: 1; font: 500 .8125rem/1 var(--mono); color: var(--ash); background: var(--pit); border-radius: 4px; padding: 7px 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .browser .url b { color: var(--bone); font-weight: 500; }
+    .browser img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; transition: transform .5s ease; }
+    .site a.shot { display: block; text-decoration: none; }
+    .site a.shot:hover img { transform: scale(1.02); }
+    .site h3 { font: 900 2.25rem/.95 var(--display); text-transform: uppercase; margin: 24px 0 10px; }
+    .site p { color: var(--bone-dim); margin: 0 0 18px; max-width: 34rem; }
+
+    footer { border-top: 1px solid var(--line); padding-block: 32px 48px; display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; color: var(--ash); font-size: .9375rem; }
+    footer nav { display: flex; gap: 20px; }
+    footer a { text-decoration: none; }
+    footer a:hover { color: var(--bone); }
+
+    @media (max-width: 520px) {
+      .vid-list .vid { grid-template-columns: 112px minmax(0, 1fr); }
+      .facts b { font-size: .9375rem; }
+    }
   </style>
 </head>
 <body>
+  <!-- filtre « craie » pour les bâtons du compteur -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="chalk"><feTurbulence type="fractalNoise" baseFrequency=".08" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="4"/></filter>
+  </svg>
+
   <div class="wrap">
-    <header>
-      <h1>Kenshin9977</h1>
-      <p>Vidéos sur le mode Zombies de Call of Duty et l'informatique, petits outils Windows open source et quelques sites web. Tout est ici.</p>
-      <nav class="socials" aria-label="Réseaux">
+    <header class="hero">
+      <div class="badge"><img src="assets/avatar.webp" alt="Le soldat zombie, logo de la chaîne Kenshin9977" width="400" height="400"></div>
+      <div>
+        <p class="eyebrow">Youtubeur · développeur</p>
+        <h1>Kenshin<span>9977</span></h1>
+        <p class="lede">Je fais des vidéos sur le mode Zombies de Call of Duty. À côté, je code des petits outils Windows open source et quelques sites web. Voici tout ce qui tourne en ce moment.</p>
+        <div class="round">
+          <span class="tally draw" data-count="8" aria-hidden="true"></span>
+          <small><b>8 projets</b>en cours</small>
+        </div>
+        <ul class="socials">
+          <li><a class="btn red" href="https://www.youtube.com/@Kenshin9977"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>YouTube</a></li>
+          <li><a class="btn" href="https://github.com/Kenshin9977"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub</a></li>
+          <li><a class="btn" href="https://x.com/Kenshin9977"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.8 2.3h7l4.8 6.4 5.6-6.4Zm-1.2 17.9h1.9L7 4.2H5l12 16Z"/></svg>X</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- ================= Chaîne ================= -->
+    <section id="chaine">
+      <div class="sec-head">
+        <h2>La chaîne</h2>
+        <span class="tally" data-count="1" aria-hidden="true"></span>
+        <p>Guides d'Easter Eggs, quêtes principales et histoire du mode Zombies, en français.</p>
+      </div>
+      <div class="channel">
+        <a class="vid main" href="https://www.youtube.com/watch?v=AkUxYamXR5A">
+          <div class="thumb"><img src="assets/yt-AkUxYamXR5A.webp" alt="" width="640" height="360"><span class="play"></span></div>
+          <h3>La quête principale de la Citadelle des Morts</h3>
+          <span class="label">Dernière vidéo · Black Ops 6</span>
+        </a>
+        <ul class="vid-list">
+          <li><a class="vid" href="https://www.youtube.com/watch?v=FRdclZSSJQ0"><div class="thumb"><img src="assets/yt-FRdclZSSJQ0.webp" alt="" width="640" height="360" loading="lazy"></div><span>Tout sur Terminus</span></a></li>
+          <li><a class="vid" href="https://www.youtube.com/watch?v=TL3FwUeM04s"><div class="thumb"><img src="assets/yt-TL3FwUeM04s.webp" alt="" width="640" height="360" loading="lazy"></div><span>Tout sur Liberty Falls</span></a></li>
+          <li><a class="vid" href="https://www.youtube.com/watch?v=rbJETYBCXsM"><div class="thumb"><img src="assets/yt-rbJETYBCXsM.webp" alt="" width="640" height="360" loading="lazy"></div><span>L'histoire du mode zombie de Call of Duty</span></a></li>
+          <li><a class="vid" href="https://www.youtube.com/watch?v=N5Kf2DSe2aI"><div class="thumb"><img src="assets/yt-N5Kf2DSe2aI.webp" alt="" width="640" height="360" loading="lazy"></div><span>Black Ops 6 : avis, critique et infos</span></a></li>
+          <li><a class="vid" href="https://www.youtube.com/watch?v=6v8fcWF_maI"><div class="thumb"><img src="assets/yt-6v8fcWF_maI.webp" alt="" width="640" height="360" loading="lazy"></div><span>Zombie Chronicles : toutes les quêtes secondaires</span></a></li>
+        </ul>
+      </div>
+      <div class="channel-cta">
+        <a class="btn red" href="https://www.youtube.com/@Kenshin9977?sub_confirmation=1">S'abonner</a>
+        <a class="btn" href="https://www.youtube.com/@Kenshin9977/videos">Toutes les vidéos</a>
+      </div>
+    </section>
+
+    <!-- ================= Logiciels ================= -->
+    <section id="logiciels">
+      <div class="sec-head">
+        <h2>Logiciels</h2>
+        <span class="tally" data-count="5" aria-hidden="true"></span>
+        <p>Des outils Windows gratuits et open source, nés d'un problème que j'avais moi-même.</p>
+      </div>
+
+      <div class="dossiers">
+        <article class="proj">
+          <div class="proj-text">
+            <p class="kicker">Téléchargeur vidéo</p>
+            <h3>video-dl</h3>
+            <p class="pitch">Une interface pour yt-dlp. Tu colles un lien, tu choisis la qualité et les images par seconde, tu télécharges. Pas de ligne de commande, et une option pour sortir un fichier prêt pour le montage.</p>
+            <ul class="facts">
+              <li><span>Version</span><b>v2.4.3</b></li>
+              <li><span>Étoiles</span><b>★ 56</b></li>
+              <li><span>Langage</span><b>Python</b></li>
+            </ul>
+            <div class="actions">
+              <a class="btn red" href="https://github.com/Kenshin9977/video-dl/releases/latest">Télécharger</a>
+              <a class="btn" href="https://github.com/Kenshin9977/video-dl">Code source</a>
+            </div>
+          </div>
+          <div class="stage">
+            <img class="win one tilt-r" src="assets/videodl.webp" alt="Fenêtre de video-dl : champ de lien, qualité max 1080p, 60 IPS" width="550" height="620" loading="lazy">
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="proj-text">
+            <p class="kicker">Outil pour streamers · OBS</p>
+            <h3>DiscordOverlay</h3>
+            <p class="pitch">L'overlay vocal Discord StreamKit dans OBS suit le salon où tu te trouves. Tu changes de serveur en plein stream, l'overlay suit, même quand un modérateur te déplace.</p>
+            <ul class="facts">
+              <li><span>Version</span><b>v2.2.0</b></li>
+              <li><span>Étoiles</span><b>★ 16</b></li>
+              <li><span>Langage</span><b>C#</b></li>
+            </ul>
+            <div class="actions">
+              <a class="btn red" href="https://github.com/Kenshin9977/Discord-Overlay/releases/latest">Télécharger</a>
+              <a class="btn" href="https://github.com/Kenshin9977/Discord-Overlay">Code source</a>
+            </div>
+          </div>
+          <div class="stage">
+            <div class="fan">
+              <img class="win back" src="assets/dov-overlay.webp" alt="" width="600" height="780" loading="lazy">
+              <img class="win front" src="assets/dov-conn.webp" alt="Réglages de DiscordOverlay : connexion Discord et WebSocket OBS" width="600" height="780" loading="lazy">
+            </div>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="proj-text">
+            <p class="kicker">Audio Windows</p>
+            <h3>AudioWinFix</h3>
+            <p class="pitch">Windows bascule tout seul sur le casque que tu viens de brancher. AudioWinFix remet tes périphériques par défaut à leur place et peut verrouiller le volume d'un appareil. Tes changements manuels, eux, sont gardés.</p>
+            <ul class="facts">
+              <li><span>Version</span><b>v0.1.0</b></li>
+              <li><span>Étoiles</span><b>★ 5</b></li>
+              <li><span>Langage</span><b>C#</b></li>
+            </ul>
+            <div class="actions">
+              <a class="btn red" href="https://github.com/Kenshin9977/AudioWinFix/releases/latest">Télécharger</a>
+              <a class="btn" href="https://github.com/Kenshin9977/AudioWinFix">Code source</a>
+            </div>
+          </div>
+          <div class="stage">
+            <div class="pop">
+              <img class="win main-win tilt-l" src="assets/awf-settings.webp" alt="Réglages d'AudioWinFix : délai de bascule et verrouillage du volume" width="500" height="540" loading="lazy">
+              <img class="win popover" src="assets/awf-tray.webp" alt="Menu d'AudioWinFix dans la barre des tâches" width="177" height="170" loading="lazy">
+            </div>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="proj-text">
+            <p class="kicker">Câbles USB-C</p>
+            <h3>usbscope</h3>
+            <p class="pitch">Que vaut vraiment ce câble USB-C ? usbscope te le dit depuis la barre des tâches, dès que tu le branches. Inspiré de WhatCable sur macOS.</p>
+            <ul class="facts">
+              <li><span>Plateforme</span><b>Windows</b></li>
+              <li><span>Étoiles</span><b>★ 3</b></li>
+              <li><span>Langage</span><b>C#</b></li>
+            </ul>
+            <div class="actions">
+              <a class="btn" href="https://github.com/Kenshin9977/usbscope">Code source</a>
+            </div>
+          </div>
+          <div class="stage usb-stage" aria-hidden="true">
+            <!-- prise USB-C vue de face -->
+            <svg viewBox="0 0 400 220">
+              <rect x="30" y="50" width="340" height="120" rx="60" fill="none" stroke="var(--bone)" stroke-width="10"/>
+              <rect x="70" y="84" width="260" height="52" rx="26" fill="var(--rust)" stroke="var(--blood)" stroke-width="4"/>
+              <g fill="var(--bone)">
+                <rect x="96" y="96" width="10" height="10" rx="2"/><rect x="118" y="96" width="10" height="10" rx="2"/><rect x="140" y="96" width="10" height="10" rx="2"/><rect x="162" y="96" width="10" height="10" rx="2"/><rect x="184" y="96" width="10" height="10" rx="2"/><rect x="206" y="96" width="10" height="10" rx="2"/><rect x="228" y="96" width="10" height="10" rx="2"/><rect x="250" y="96" width="10" height="10" rx="2"/><rect x="272" y="96" width="10" height="10" rx="2"/><rect x="294" y="96" width="10" height="10" rx="2"/>
+                <rect x="96" y="114" width="10" height="10" rx="2"/><rect x="118" y="114" width="10" height="10" rx="2"/><rect x="140" y="114" width="10" height="10" rx="2"/><rect x="162" y="114" width="10" height="10" rx="2"/><rect x="184" y="114" width="10" height="10" rx="2"/><rect x="206" y="114" width="10" height="10" rx="2"/><rect x="228" y="114" width="10" height="10" rx="2"/><rect x="250" y="114" width="10" height="10" rx="2"/><rect x="272" y="114" width="10" height="10" rx="2"/><rect x="294" y="114" width="10" height="10" rx="2"/>
+              </g>
+              <text x="200" y="205" text-anchor="middle" fill="var(--ash)" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="3">USB-C · 24 BROCHES</text>
+            </svg>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="proj-text">
+            <p class="kicker">Extraction d'assets Call of Duty</p>
+            <h3>Greyhound</h3>
+            <p class="pitch">Ma version de Greyhound, l'extracteur d'assets Call of Duty. Modèles, textures, sons, animations et maps, lus directement dans les fichiers du jeu, sans avoir à le lancer. Sur Black Ops III, les 264 zones du jeu sont lues.</p>
+            <ul class="facts">
+              <li><span>Accès</span><b>Privé</b></li>
+              <li><span>Jeux</span><b>BO1 → BO4</b></li>
+              <li><span>Langage</span><b>C++</b></li>
+            </ul>
+          </div>
+          <div class="stage greyhound-stage">
+            <img src="assets/greyhound-logo.webp" alt="Logo de Greyhound, un lévrier aux couleurs néon" width="640" height="640" loading="lazy">
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= Sites ================= -->
+    <section id="sites">
+      <div class="sec-head">
+        <h2>Sites web</h2>
+        <span class="tally" data-count="2" aria-hidden="true"></span>
+      </div>
+      <div class="sites">
+        <article class="site">
+          <a class="shot" href="https://cod-zombies.com">
+            <div class="browser">
+              <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">https://<b>cod-zombies.com</b></span></div>
+              <img src="assets/codz.webp" alt="Page d'accueil de CoD Zombies Guide" width="1440" height="900" loading="lazy">
+            </div>
+          </a>
+          <h3>CoD Zombies Guide</h3>
+          <p>Tous les guides, Easter Eggs et secrets du mode Zombies, pour toutes les maps et tous les jeux. Avec des outils pour résoudre les étapes les plus pénibles.</p>
+          <a class="btn" href="https://cod-zombies.com">Ouvrir cod-zombies.com</a>
+        </article>
+        <article class="site">
+          <a class="shot" href="https://reparationmanette.fr">
+            <div class="browser">
+              <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">https://<b>reparationmanette.fr</b></span></div>
+              <img src="assets/site-gamepad.webp" alt="Page d'accueil de Techshin Repairs" width="1440" height="900" loading="lazy">
+            </div>
+          </a>
+          <h3>Techshin Repairs</h3>
+          <p>Réparation de manettes : capteurs anti-drift à effet Hall, installation de palettes, remplacement de batterie. Commande et suivi en ligne, garantie 2 ans.</p>
+          <a class="btn" href="https://reparationmanette.fr">Ouvrir reparationmanette.fr</a>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 Kenshin9977</span>
+      <nav aria-label="Réseaux">
         <a href="https://www.youtube.com/@Kenshin9977">YouTube</a>
         <a href="https://github.com/Kenshin9977">GitHub</a>
         <a href="https://x.com/Kenshin9977">X</a>
       </nav>
-    </header>
-
-    <section>
-      <h2>Chaîne</h2>
-      <div class="grid">
-        <article class="card featured">
-          <h3><a href="https://www.youtube.com/@Kenshin9977">Kenshin9977 sur YouTube</a></h3>
-          <p>Guides et Easter Eggs Call of Duty Zombies, et des vidéos de vulgarisation sur l'informatique.</p>
-          <div class="meta"><span class="tag accent">YouTube</span></div>
-        </article>
-      </div>
-    </section>
-
-    <section>
-      <h2>Logiciels</h2>
-      <div class="grid">
-        <article class="card">
-          <h3><a href="https://github.com/Kenshin9977/video-dl">video-dl</a></h3>
-          <p>Une interface graphique pour yt-dlp qui rend le téléchargement de vidéos simple, sans ligne de commande.</p>
-          <div class="meta">
-            <span class="tag">Python</span>
-            <div class="links"><a href="https://github.com/Kenshin9977/video-dl/releases/latest">Télécharger</a></div>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3><a href="https://github.com/Kenshin9977/Discord-Overlay">DiscordOverlay</a></h3>
-          <p>Garde l'overlay vocal Discord StreamKit d'OBS sur le salon où tu te trouves : change de serveur ou de salon en plein stream, l'overlay suit.</p>
-          <div class="meta">
-            <span class="tag">C#</span><span class="tag">OBS</span>
-            <div class="links"><a href="https://github.com/Kenshin9977/Discord-Overlay/releases/latest">Télécharger</a></div>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3><a href="https://github.com/Kenshin9977/AudioWinFix">AudioWinFix</a></h3>
-          <p>Fixe tes périphériques audio par défaut (lecture, enregistrement, communication) et annule les bascules automatiques de Windows au branchement.</p>
-          <div class="meta">
-            <span class="tag">C#</span>
-            <div class="links"><a href="https://github.com/Kenshin9977/AudioWinFix/releases/latest">Télécharger</a></div>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3><a href="https://github.com/Kenshin9977/usbscope">usbscope</a></h3>
-          <p>Que vaut vraiment ce câble USB-C ? Application Windows dans la barre des tâches, inspirée de WhatCable sur macOS.</p>
-          <div class="meta"><span class="tag">C#</span></div>
-        </article>
-
-        <article class="card">
-          <h3>Greyhound</h3>
-          <p>Ma version de Greyhound, l'extracteur d'assets Call of Duty : modèles, textures, sons, animations et maps, lus directement depuis les fichiers du jeu.</p>
-          <div class="meta"><span class="tag">C++</span></div>
-        </article>
-      </div>
-    </section>
-
-    <section>
-      <h2>Sites web</h2>
-      <div class="grid">
-        <article class="card">
-          <h3><a href="https://cod-zombies.com">CoD Zombies Guide</a></h3>
-          <p>Tous les guides, Easter Eggs et secrets du mode Zombies de Call of Duty, pour toutes les maps et tous les jeux.</p>
-          <div class="meta"><span class="tag">cod-zombies.com</span></div>
-        </article>
-
-        <article class="card">
-          <h3><a href="https://kenshin9977.xyz">Techshin Repairs</a></h3>
-          <p>Réparation de manettes de jeu : commande en ligne, devis automatique, paiement et suivi de la réparation.</p>
-          <div class="meta"><span class="tag">kenshin9977.xyz</span></div>
-        </article>
-      </div>
-    </section>
-
-    <footer>© Kenshin9977</footer>
+    </footer>
   </div>
+
+  <script>
+    // Compteur de manches façon Zombies : groupes de 5 bâtons, le 5e barre les 4 autres.
+    document.querySelectorAll('.tally[data-count]').forEach(function (el, n) {
+      var count = +el.dataset.count, delay = 0, animated = el.classList.contains('draw');
+      for (var g = 0; g < Math.ceil(count / 5); g++) {
+        var inGroup = Math.min(5, count - g * 5), paths = '';
+        for (var i = 0; i < Math.min(4, inGroup); i++) {
+          var x = 8 + i * 17, wob = (i % 2 ? 2 : -2);
+          paths += '<path d="M' + x + ' 6 L' + (x + wob) + ' 94" style="animation-delay:' + delay + 's"/>';
+          delay += .12;
+        }
+        if (inGroup === 5) {
+          paths += '<path d="M-2 70 L70 30" style="animation-delay:' + (delay + .1) + 's"/>';
+          delay += .25;
+        }
+        var w = inGroup === 5 ? 76 : 8 + (inGroup - 1) * 17 + 8;
+        el.insertAdjacentHTML('beforeend', '<svg viewBox="-4 0 ' + (w + 4) + ' 100">' + paths + '</svg>');
+      }
+      if (!animated) el.querySelectorAll('path').forEach(function (p) { p.removeAttribute('style'); });
+    });
+  </script>
 </body>
 </html>
