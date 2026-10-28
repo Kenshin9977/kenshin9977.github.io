@@ -178,10 +178,8 @@
 
     .one { width: min(420px, 90%); }
 
-    .wolf-stage { margin: 0; padding: 0; }
-    .wolf-stage img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; filter: sepia(.15) contrast(1.05); }
-    .wolf-stage::after { content: ""; position: absolute; inset: auto 0 0 0; height: 30%; background: linear-gradient(transparent, rgba(0,0,0,.6)); pointer-events: none; }
-    .wolf-stage figcaption { position: absolute; z-index: 1; left: 12px; bottom: 10px; right: 12px; font: 500 .6875rem/1.3 var(--mono); color: rgba(235, 227, 211, .75); text-shadow: 0 1px 3px #000; }
+    .video-stage { margin: 0; display: grid; place-items: center; }
+    .video-stage video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #15171c; }
 
     .usb-stage { display: grid; place-items: center; min-height: 320px; }
     .usb-stage svg { width: min(380px, 90%); height: auto; }
@@ -374,17 +372,20 @@
         <article class="proj">
           <div class="proj-text">
             <p class="kicker">Extraction d'assets Call of Duty</p>
-            <h3>Greyhound</h3>
-            <p class="pitch">Ma version de Greyhound, l'extracteur d'assets Call of Duty. Modèles, textures, sons, animations et maps, lus directement dans les fichiers du jeu, sans avoir à le lancer. Sur Black Ops III, les 264 zones du jeu sont lues.</p>
+            <h3>GrayWolf</h3>
+            <p class="pitch">L'extracteur d'assets Call of Duty, de Call of Duty (2003) à Black Ops 7. Modèles, textures, sons, effets, animations et maps, lus directement dans les fichiers du jeu, sans avoir à le lancer. On choisit un jeu, on cherche un asset parmi des centaines de milliers, on le prévisualise et on l'exporte.</p>
             <ul class="facts">
-              <li><span>Accès</span><b>Privé</b></li>
-              <li><span>Jeux</span><b>BO1 → BO4</b></li>
+              <li><span>Version</span><b>v0.7.0</b></li>
+              <li><span>Étoiles</span><b>★ 13</b></li>
               <li><span>Langage</span><b>C++</b></li>
             </ul>
+            <div class="actions">
+              <a class="btn red" href="https://github.com/Kenshin9977/GrayWolf/releases/latest">Télécharger</a>
+              <a class="btn" href="https://github.com/Kenshin9977/GrayWolf">Code source</a>
+            </div>
           </div>
-          <figure class="stage wolf-stage">
-            <img src="assets/wolf.webp" alt="Un loup gris du Mexique qui trotte dans les herbes sèches" width="1100" height="733" loading="lazy">
-            <figcaption>Loup gris du Mexique · Jim Clark, U.S. Fish and Wildlife Service, domaine public</figcaption>
+          <figure class="stage video-stage">
+            <video class="win" src="assets/graywolf-demo.mp4" poster="assets/graywolf-poster.webp" width="1280" height="720" autoplay muted loop playsinline preload="metadata" aria-label="GrayWolf en action : recherche et aperçu d'une arme de Black Ops 4, puis modèles, textures, effets, animations et la map Nuketown"></video>
           </figure>
         </article>
       </div>
